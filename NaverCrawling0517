@@ -1,3 +1,5 @@
+#딕트 형태로 
+
 import json
 import requests
 import pandas as pd
