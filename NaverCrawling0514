@@ -1,3 +1,5 @@
+﻿#수정된 버전
+
 import json
 import requests
 
