@@ -1,6 +1,4 @@
-﻿#수정된 버전
-
-import json
+﻿import json
 import requests
 
 manyproduct = {'clubclio':'2789384816'}
