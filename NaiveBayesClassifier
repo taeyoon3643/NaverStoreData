@@ -19,7 +19,7 @@ pos_dic = []
 neg_dic = []
 neu_dic = []
 
-p = r'[가-힣]+'
+p = r'^[가-힣]'
 
 for i, row in df.iterrows():
     if row['max.value'] ==  'POS':
