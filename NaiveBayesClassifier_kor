@@ -1,11 +1,7 @@
-import nltk.classify.util
-from nltk.classify import NaiveBayesClassifier
-from nltk.corpus import names
 
+from nltk.classify import NaiveBayesClassifier
 import pandas as pd
 from konlpy.tag import Twitter
-from collections import Counter
-from konlpy.utils import pprint
 import re
 
 twitter = Twitter()
