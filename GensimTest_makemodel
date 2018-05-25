@@ -8,7 +8,7 @@ from gensim.models.word2vec import LineSentence
 
 twitter = Twitter()
 
-df = pd.read_csv("C:/naverstore/living_data1.csv")
+df = pd.read_csv("C:/naverstore/final/comment_data.csv")
 data = df[df['content'].notnull()]
 lines = data['content']
 results=[]
@@ -23,23 +23,14 @@ for line in lines :
         results.append(r1)
         print(r1)
 
-wakati_file = 'naver.wakati'
+wakati_file = 'naverall.wakati'
 
 with open(wakati_file, 'w', encoding='utf-8') as fp :
     fp.write("\n".join(results))
 
-# f = open("C:/naverstore/naver.wakati", 'r', encoding='utf-8')
-# wakati_file = f.read()
-
 data = LineSentence(wakati_file)
 model = Word2Vec(data, size=200, window=10, hs=1, min_count=2, sg=1)
 print(model)
-model.save("kokoro.model")
+model.save("naver.model")
 print("ok")
-
-
-
-
-
-
 
