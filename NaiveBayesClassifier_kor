@@ -15,26 +15,25 @@ df_dic = pd.read_csv("C:/lexicon/polarity.csv", encoding='utf-8')
 df = df_dic[df_dic['max.value'].notnull()]
 df = df[['ngram','max.value']]
 
+p = r'^[가-힣]+'
+
 pos_dic = []
 neg_dic = []
 neu_dic = []
-
-p = r'^[가-힣]+'
-
 for i, row in df.iterrows():
     if row['max.value'] ==  'POS':
-        pos_dic.append(re.findall(p, row['ngram']))
+        pos_dic.extend(re.findall(p, row['ngram']))
     elif row['max.value'] ==  'NEG':
-        neg_dic.append(re.findall(p, row['ngram']))
+        neg_dic.extend(re.findall(p, row['ngram']))
     elif row['max.value'] ==  'NEUT':
-        neu_dic.append(re.findall(p, row['ngram']))
+        neu_dic.extend(re.findall(p, row['ngram']))
 
 def word_feats(words):
-    return dict([(word, True) for word in words])
+    return dict((word, True) for word in words)
 
-positive_vocab = pos_dic
-negative_vocab = neg_dic
-neutral_vocab = neu_dic
+positive_vocab = list(set(pos_dic))
+negative_vocab = list(set(neg_dic))
+neutral_vocab = list(set(neu_dic))
 
 positive_features = [(word_feats(pos), 'pos') for pos in positive_vocab]
 negative_features = [(word_feats(neg), 'neg') for neg in negative_vocab]
@@ -47,12 +46,12 @@ classifier = NaiveBayesClassifier.train(train_set)
 neg = 0
 pos = 0
 neu = 0
-df = pd.read_csv("C:/naverstore/living_data1.csv")
+df = pd.read_csv("C:/naverstore/final/comment_data.csv")
 data = df[df['content'].notnull()]
 
 for sentence in data['content']:
     sentence = sentence.lower()
-    words = sentence.split(' ')
+    words = sentence.split(',')
 
     for word in words:
         classResult = classifier.classify(word_feats(word))
